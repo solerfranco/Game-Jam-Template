@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -15,19 +16,18 @@ public class PauseMenu : MonoBehaviour
     private void Awake()
     {
         _inputActions = new PlayerInputActions();
-        _inputActions.UI.Escape.performed += ToggleMenu;
+        _inputActions.UI.Escape.performed += PauseInput;
     }
 
-    private void ToggleMenu(InputAction.CallbackContext context)
+    private void PauseInput(InputAction.CallbackContext context)
+    {
+        ToggleMenu();
+    }
+
+    public void ToggleMenu()
     {
         Time.timeScale = _menuContainer.activeSelf ? 1 : 0;
         _menuContainer.SetActive(!_menuContainer.activeSelf);
-    }
-
-    public void Resume()
-    {
-        Time.timeScale = 1;
-        _menuContainer.SetActive(false);
     }
 
     public void OpenSettings()
