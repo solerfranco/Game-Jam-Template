@@ -33,6 +33,7 @@ public class SettingsMenu : MonoBehaviour
         masterSlider.value = masterVolume;
         musicSlider.value = musicVolume;
         sfxSlider.value = sfxVolume;
+        CheckSetup();
     }
 
     private void CloseSettings(InputAction.CallbackContext obj)
@@ -56,6 +57,14 @@ public class SettingsMenu : MonoBehaviour
     {
         audioMixer.SetFloat("sfxVolume", Mathf.Log10(volume) * 20);
         PlayerPrefs.SetFloat("sfxVolume", volume);
+    }
+
+    private void CheckSetup()
+    {
+        if (Time.timeSinceLevelLoad < 0.1) 
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     private void OnEnable()

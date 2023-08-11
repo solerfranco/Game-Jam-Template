@@ -47,7 +47,7 @@ public class ResolutionSettings : MonoBehaviour
             return;
         }
 
-        resolutions = Screen.resolutions.Where(resolution => resolution.refreshRate == 60).ToArray();
+        resolutions = Screen.resolutions.Where(resolution => resolution.refreshRateRatio.value == 60).ToArray();
         for (int i = 0; i < resolutions.Length; i++)
         {
             if(resolutions[i].width == Screen.width &&
