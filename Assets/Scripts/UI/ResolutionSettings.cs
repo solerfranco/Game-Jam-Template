@@ -1,33 +1,33 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System.Linq;
 
 public class ResolutionSettings : MonoBehaviour
 {
-    Resolution[] resolutions;
+    private Resolution[] resolutions;
 
-    public GameObject previousButton;
-    public GameObject nextButton;
-    public TextMeshProUGUI textValue;
+    [SerializeField]
+    private GameObject _previousButton, _nextButton;
+    
+    [SerializeField]
+    private TextMeshProUGUI _textValue;
 
+    private int _index;
     private int Index
     {
         get
         {
-            return index;
+            return _index;
         }
         set
         {
-            index = value;
-            previousButton.SetActive(index > 0);
-            nextButton.SetActive(index < resolutions.Length - 1);
+            _index = value;
+            _previousButton.SetActive(_index > 0);
+            _nextButton.SetActive(_index < resolutions.Length - 1);
             ChangeResolution();
-            textValue.text = resolutions[index].width.ToString() + " x " + resolutions[index].height.ToString();
+            _textValue.text = resolutions[_index].width.ToString() + " x " + resolutions[_index].height.ToString();
         }
     }
-    private int index;
 
     private void ChangeResolution()
     {

@@ -3,13 +3,14 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public GameObject quitButton;
+    [SerializeField]
+    private GameObject _quitButton;
 
     private void Awake()
     {
         if (Application.platform == RuntimePlatform.WebGLPlayer)
         {
-            quitButton.SetActive(false);
+            _quitButton.SetActive(false);
         }
     }
 

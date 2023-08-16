@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -17,7 +15,7 @@ public class GraphicsSettings : MonoBehaviour
         }
     }
 
-    private GraphicsIndex[] graphics =
+    private readonly GraphicsIndex[] graphics =
     {
         new GraphicsIndex(0, "Very Low"),
         new GraphicsIndex(1, "Low"),
@@ -27,26 +25,28 @@ public class GraphicsSettings : MonoBehaviour
         new GraphicsIndex(5, "Ultra"),
     };
 
-    public GameObject previousButton;
-    public GameObject nextButton;
-    public TextMeshProUGUI textValue;
+    [SerializeField]
+    private GameObject _previousButton, _nextButton;
 
+    [SerializeField]
+    private TextMeshProUGUI _textValue;
+
+    private int _index;
     private int Index
     {
         get
         {
-            return index;
+            return _index;
         }
         set
         {
-            index = value;
-            previousButton.SetActive(index > 0);
-            nextButton.SetActive(index < graphics.Length - 1);
+            _index = value;
+            _previousButton.SetActive(_index > 0);
+            _nextButton.SetActive(_index < graphics.Length - 1);
             ChangeGraphics();
-            textValue.text = graphics[index].name;
+            _textValue.text = graphics[_index].name;
         }
     }
-    private int index;
 
     private void ChangeGraphics()
     {

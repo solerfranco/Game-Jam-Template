@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -7,11 +5,14 @@ using UnityEngine.UI;
 
 public class UpdateSliderText : MonoBehaviour
 {
-    public TextMeshProUGUI sliderText;
-    public Slider slider;
+    [SerializeField]
+    private TextMeshProUGUI _sliderText;
+    
+    [SerializeField]
+    private Slider _slider;
 
     public void ChangeSliderText(float value)
     {
-        sliderText.text = ((slider.maxValue * 100) * slider.value).ToString("0") + "%";
+        _sliderText.text = ((_slider.maxValue * 100) * value).ToString("0") + "%";
     }
 }

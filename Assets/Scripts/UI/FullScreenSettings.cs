@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using System;
@@ -18,37 +16,39 @@ public class FullScreenSettings : MonoBehaviour
         }
     }
 
-    private FullScreenType[] types =
+    private readonly FullScreenType[] _types =
     {
         new FullScreenType(FullScreenMode.ExclusiveFullScreen, "FullScreen"),
         new FullScreenType(FullScreenMode.FullScreenWindow, "Borderless"),
         new FullScreenType(FullScreenMode.Windowed, "Windowed")
     };
 
-    public GameObject previousButton;
-    public GameObject nextButton;
-    public TextMeshProUGUI textValue;
+    [SerializeField]
+    private GameObject _previousButton, _nextButton;
 
+    [SerializeField]
+    private TextMeshProUGUI _textValue;
+
+    private int _index;
     public int Index
     {
         get
         {
-            return index;
+            return _index;
         }
         set
         {
-            index = value;
-            previousButton.SetActive(index > 0);
-            nextButton.SetActive(index < types.Length - 1);
+            _index = value;
+            _previousButton.SetActive(_index > 0);
+            _nextButton.SetActive(_index < _types.Length - 1);
             ChangeFullScreenMode();
-            textValue.text = types[index].name;
+            _textValue.text = _types[_index].name;
         }
     }
-    private int index;
 
     private void ChangeFullScreenMode()
     {
-        Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, types[Index].mode);
+        Screen.SetResolution(Screen.currentResolution.width, Screen.currentResolution.height, _types[Index].mode);
     }
 
     public void IncrementIndex() { Index++; }
@@ -62,6 +62,6 @@ public class FullScreenSettings : MonoBehaviour
             gameObject.SetActive(false);
             return;
         }
-        Index = Array.FindIndex(types, type => type.mode == Screen.fullScreenMode);
+        Index = Array.FindIndex(_types, type => type.mode == Screen.fullScreenMode);
     }
 }
