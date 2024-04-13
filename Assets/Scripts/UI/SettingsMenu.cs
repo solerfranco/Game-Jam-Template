@@ -8,6 +8,9 @@ public class SettingsMenu : MonoBehaviour
     private AudioMixer _audioMixer;
     private PlayerInputActions _uiInputActions;
 
+    [SerializeField]
+    private GameObject _settingsContainer;
+
     private void Awake()
     {
         _uiInputActions = new PlayerInputActions();
@@ -18,7 +21,7 @@ public class SettingsMenu : MonoBehaviour
 
     private void CloseSettings(InputAction.CallbackContext obj)
     {
-        gameObject.SetActive(false);
+        _settingsContainer.SetActive(false);
     }
 
     public void SetMasterVolume(float volume)
